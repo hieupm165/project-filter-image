@@ -18,6 +18,6 @@ Deploy Your System:
 Follow the deployment process described in the course, including using Elastic Beanstalk (eb init, eb create, and eb deploy) to deploy the image-filtering service.
 
 My Elastic Beanstalk Endpoint:
-http://imagefilter2-dev.us-east-1.elasticbeanstalk.com/filteredimage?image_url=https://upload.wikimedia.org/wikipedia/commons/b/bd/Golden_tabby_and_white_kitten_n01.jpg
+http://my-eb-project-env.eba-itfgphir.us-east-1.elasticbeanstalk.com/filteredimage?image_url=https://mezha.media/wp-content/uploads/2022/07/dall-e-image-2.jpg
 Optional: Stand Out Tasks:
 Elastic Beanstalk Endpoint: You've provided an Elastic Beanstalk endpoint where your image filtering service can be accessed.
