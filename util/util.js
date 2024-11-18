@@ -1,5 +1,6 @@
 import fs from "fs";
 import Jimp from "jimp";
+import axios from "axios";
 
 
 // filterImageFromURL
@@ -9,24 +10,32 @@ import Jimp from "jimp";
 //    inputURL: string - a publicly accessible url to an image file
 // RETURNS
 //    an absolute path to a filtered image locally saved file
- export async function filterImageFromURL(inputURL) {
+
+export async function filterImageFromURL(inputURL) {
   return new Promise(async (resolve, reject) => {
     try {
-      const photo = await Jimp.read(inputURL);
-      const outpath =
-        "/tmp/filtered." + Math.floor(Math.random() * 2000) + ".jpg";
-      await photo
+      const response = await axios.get(inputURL, { responseType: 'arraybuffer' });
+      const image = await Jimp.read(Buffer.from(response.data));
+      const outputPath = "/tmp/filtered." + Math.floor(Math.random() * 2000) + ".jpg";
+
+      await image
         .resize(256, 256) // resize
         .quality(60) // set JPEG quality
         .greyscale() // set greyscale
-        .write(outpath, (img) => {
-          resolve(outpath);
+        .write(outputPath, (img) => {
+          resolve(outputPath);
         });
+
     } catch (error) {
       reject(error);
+      console.error(`Error processing image: ${error.message}`);
+      if (error.message.includes("Could not find MIME")) {
+        console.error("Invalid image data or unsupported format.");
+      }
     }
   });
 }
+
 
 // deleteLocalFiles
 // helper function to delete files on the local disk

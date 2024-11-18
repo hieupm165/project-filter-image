@@ -41,6 +41,9 @@ import { filterImageFromURL, deleteLocalFiles } from './util/util.js';
           .catch((err) => res.status(500).send(err))
       }
   });
+  app.get('/health', (req, res) => {
+  res.status(200).send('OK'); // Send a 200 status and an "OK" message
+});
   //! END @TODO1
   
   // Root Endpoint
